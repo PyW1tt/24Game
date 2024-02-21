@@ -2,8 +2,13 @@ import express from "express"
 import bodyParser from "body-parser"
 import cors from "cors"
 import { Request, Response } from "express"
+import { is24 } from "./component/output24game"
+// import { runNumber } from "./component/swapNumbers"
 
-function init() {
+async function init() {
+  // await client.connect()
+  // console.log("------- Connecting to MongoDB Successfully -------")
+
   const app = express()
   const port = 4000
 
@@ -23,7 +28,22 @@ function init() {
     //check answer in db
     //
 
-    return res.status(200).json(number)
+    const numbers = {
+      num1: Number(number[0]),
+      num2: Number(number[1]),
+      num3: Number(number[2]),
+      num4: Number(number[3]),
+    }
+    const result = is24(numbers)
+    // console.log(result.length > 0)
+
+    if (result.length <= 0) {
+      return res.status(200).json("No Answer")
+    } else {
+      return res.status(200).json(result)
+    }
+
+    // return res.status(200).json(result)
   })
 
   app.get("/", (req: Request, res: Response) => {
@@ -40,3 +60,13 @@ function init() {
 }
 
 init()
+
+// const numbers = {
+//   num1: 6,
+//   num2: 4,
+//   num3: 6,
+//   num4: 2,
+// }
+
+// const results = is24(numbers)
+// console.log(results)
