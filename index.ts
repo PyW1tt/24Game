@@ -10,7 +10,7 @@ import { client, db } from "./utils/db"
 async function init() {
   dotenv.config()
 
-  // await client.connect()
+  await client.connect()
   // console.log("------- Connecting to MongoDB Successfully -------")
 
   const app = express()
@@ -30,37 +30,37 @@ async function init() {
 
     //check answer in db
     try {
-      // const collection = db.collection("24game")
-      // const data = await collection.findOne({
-      //   num: number,
-      // })
+      const collection = db.collection("24game")
+      const data = await collection.findOne({
+        num: number,
+      })
 
-      // if (data) {
-      //   return res.status(200).json(data.formula)
-      // } else {
-      const numbers = {
-        num1: Number(number[0]),
-        num2: Number(number[1]),
-        num3: Number(number[2]),
-        num4: Number(number[3]),
-      }
-
-      //formula 24game
-      const result = is24(numbers)
-
-      if (result.length <= 0) {
-        return res.status(200).json("No Answer")
+      if (data) {
+        return res.status(200).json(data.formula)
       } else {
-        // const allSwapNum = runNumber(number)
-        // const collection = db.collection("24game")
-        // await collection.insertOne({
-        //   num: allSwapNum,
-        //   formula: result,
-        // })
+        const numbers = {
+          num1: Number(number[0]),
+          num2: Number(number[1]),
+          num3: Number(number[2]),
+          num4: Number(number[3]),
+        }
 
-        return res.status(200).json(result)
+        //formula 24game
+        const result = is24(numbers)
+
+        if (result.length <= 0) {
+          return res.status(200).json("No Answer")
+        } else {
+          const allSwapNum = runNumber(number)
+          const collection = db.collection("24game")
+          await collection.insertOne({
+            num: allSwapNum,
+            formula: result,
+          })
+
+          return res.status(200).json(result)
+        }
       }
-      // }
     } catch (error) {
       console.log(error)
       return res.status(500).json({ message: "failed" })
