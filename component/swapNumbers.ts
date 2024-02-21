@@ -1,4 +1,4 @@
-export function runNumber(n: string): void {
+export function runNumber(n: string): string[] {
   const nums: string[] = []
   const numbers: string[] = n.split("")
 
@@ -16,10 +16,10 @@ export function runNumber(n: string): void {
             "" + numbers[i] + numbers[j] + numbers[k] + numbers[l]
           if (!nums.includes(num)) {
             nums.push(num)
-            console.log(num)
           }
         }
       }
     }
   }
+  return nums
 }
