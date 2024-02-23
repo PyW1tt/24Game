@@ -14,7 +14,7 @@ async function init() {
   // console.log("------- Connecting to MongoDB Successfully -------")
 
   const app = express()
-  const port = process.env.PORT
+  const port = 4000
 
   app.use(cors())
   app.use(bodyParser.json())
