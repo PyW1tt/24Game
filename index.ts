@@ -5,7 +5,7 @@ import dotenv from "dotenv"
 import { Request, Response } from "express"
 import { is24 } from "./component/output24game"
 import { runNumber } from "./component/swapNumbers"
-import { client, db } from "./utils/db"
+// import { client, db } from "./utils/db"
 
 async function init() {
   dotenv.config()
