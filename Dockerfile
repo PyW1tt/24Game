@@ -10,7 +10,7 @@ RUN npm install
 
 COPY ./ index.ts ./
 
-COPY ./ .env ./
+COPY . .
 
 EXPOSE 4000
 
