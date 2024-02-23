@@ -11,10 +11,10 @@ async function init() {
   dotenv.config()
 
   await client.connect()
-  // console.log("------- Connecting to MongoDB Successfully -------")
+  console.log("------- Connecting to MongoDB Successfully -------")
 
   const app = express()
-  const port = 4000
+  const port = process.env.PORT || 4000
 
   app.use(cors())
   app.use(bodyParser.json())

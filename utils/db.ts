@@ -7,7 +7,9 @@ if (!process.env.DB_CONNECTION_STRING) {
   throw new Error("DB_CONNECTION_STRING environment variable is not defined")
 }
 
-export const client = new MongoClient("mongodb://127.0.0.1:27017")
+export const client = new MongoClient(
+  process.env.DB_CONNECTION_STRING || "mongodb://127.0.0.1:27017"
+)
 console.log("------- Start connecting to MongDB -------")
 
 export const db = client.db("mongo")

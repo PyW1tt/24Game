@@ -4,10 +4,14 @@ WORKDIR /usr/src/app
 
 COPY ./package.json ./
 
+COPY ./package-lock.json ./
+
 RUN npm install
 
 COPY ./ index.ts ./
 
-EXPOSE 8000
+COPY ./ .env ./
 
-CMD npm run start
+EXPOSE 4000
+
+CMD ["npm", "start"]
