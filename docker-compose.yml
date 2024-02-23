@@ -1,9 +1,5 @@
 version: "3.9"
 services:
-  # mongo:
-  #   image: mongo:4
-  #   restart: always
-
   mongo_db:
     image: mongo:latest
     restart: always
@@ -12,18 +8,13 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: example
     ports:
       - 27017:27017
-    # volumes:
-    #   - mongo_db:/data/db
 
   node_24game:
     build: .
     ports:
-      - 5000:5000
-    # environment:
-    # APP_NAME: 24Game
-    # PORT: 4000
-    # DB_URL: mongodb://root:example@mongo_db:27017
+      - 4000:4000
+    environment:
+      PORT: 4000
+      DB_CONNECTION_STRING: mongodb://root:example@mongo_db:27017
     depends_on:
       - mongo_db
-  # volumes:
-  #   mongo_db: {}
